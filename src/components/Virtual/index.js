@@ -4,6 +4,7 @@ import React from "react";
 // import { motion } from "framer-motion";
 import Window from "../Window/index";
 import './index.css'
+import MyRow from './MyRow'
 
 const Row = ({ index, style }) => (
     <tr style={style}>
@@ -37,17 +38,20 @@ export default function Virutal(props:any) {
                     .fill({})
                     .map((_, index) => ({ id: index }))
                     .map((it) => (
-                        <tr
-                            animate={{
-                                scale: [0.89, 1]
-                            }}
-                            style={{ position: 'relative', marginTop: '18%' }}
-                            className="row"
-                            key={it.id}
-                        >
-                            <td>{it.id}</td>
-                            <td>{it.id}</td>
-                        </tr>
+                        //Working solution
+                        // <tr
+                        //     animate={{
+                        //         scale: [0.89, 1]
+                        //     }}
+                        //     style={{ position: 'relative', marginTop: '18%' }}
+                        //     className="row"
+                        //     key={it.id}
+                        // >
+                        //     <td>{it.id}</td>
+                        //     <td>{it.id}</td>
+                        // </tr>
+                        // Problem
+                        <MyRow id={it.id} ></MyRow>
                     ))}
                 {/* </ul>
                */}

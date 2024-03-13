@@ -52,6 +52,16 @@ const Window: React.FC<WindowProps> = ({
         );
 
         return children.slice(startIndex, endIndex + 1).map((child, index) => {
+            console.log(React.cloneElement(child, {
+                style: {
+                    position: "absolute",
+                    top: (startIndex + (index + 1)) * rowHeight + index * gap,
+                    height: rowHeight,
+                    left: 0,
+                    right: 0,
+                    lineHeight: `${rowHeight}px`
+                }
+            }))
             return React.cloneElement(child, {
                 style: {
                     position: "absolute",
@@ -77,6 +87,7 @@ const Window: React.FC<WindowProps> = ({
         () =>
             throttle(
                 function (e: any) {
+                    console.log("-----", e.target.scrollTop)
                     setScrollPosition(e.target.scrollTop);
                 },
                 50,
@@ -110,7 +121,12 @@ const Window: React.FC<WindowProps> = ({
                 </tr>
             </thead>
 
-            <tbody onScroll={onScroll}
+            <tbody onScroll={
+                (e) => {
+                    const scrollPos = (e.target as HTMLElement).scrollTop
+                    setScrollPosition(scrollPos);
+                }
+            }
                 style={{
                     overflowY: "scroll",
                     position: "relative"
